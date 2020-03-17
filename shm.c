@@ -46,7 +46,8 @@ for (int i = 0; i < 64; i++) {
 
 if (exists) { // CASE 1
  mappages(curproc->pgdir, (void *)PGROUNDUP(curproc->sz), PGSIZE, V2P(shm_table.shm_pages[index].frame), PTE_W | PTE_U);
- 
+
+ shm_table.shm_pages[index].refcnt++; 
  *pointer = (void *)PGROUNDUP(curproc->sz);
  curproc->sz = PGROUNDUP(curproc->sz) + PGSIZE;
 }
